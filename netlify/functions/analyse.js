@@ -22,6 +22,22 @@ exports.handler = async function(event) {
 
     const data = await response.json();
 
+    if (!response.ok) {
+      return {
+        statusCode: response.status,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: data.error?.message || 'Erreur API', detail: data })
+      };
+    }
+
+    if (!data.content || !data.content[0]) {
+      return {
+        statusCode: 500,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Réponse vide de l\'API', detail: data })
+      };
+    }
+
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
