@@ -11,12 +11,20 @@ exports.handler = async function(event) {
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'mcp-client-2025-04-04'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: 1000,
-        messages: body.messages
+        max_tokens: 2000,
+        messages: body.messages,
+        mcp_servers: [
+          {
+            type: "url",
+            url: "https://mcp.openlegi.fr/legifrance/mcp",
+            name: "legifrance"
+          }
+        ]
       })
     });
 
