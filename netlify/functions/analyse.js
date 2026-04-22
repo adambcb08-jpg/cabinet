@@ -21,7 +21,7 @@ exports.handler = async function(event) {
         mcp_servers: [
           {
             type: "url",
-            url: "https://mcp.openlegi.fr/legifrance/mcp",
+            url: process.env.OPENLEGI_MCP_URL,
             name: "legifrance"
           }
         ]
